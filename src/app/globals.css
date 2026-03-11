@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0a0a0f;
+    --foreground: #e5e7eb;
+    --card: #111119;
+    --card-foreground: #e5e7eb;
+    --primary: #FF6000;
+    --primary-foreground: #ffffff;
+    --secondary: #1a1a2e;
+    --secondary-foreground: #e5e7eb;
+    --muted: #1a1a2e;
+    --muted-foreground: #9ca3af;
+    --accent: #FF6000;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #2a2a3e;
+    --input: #2a2a3e;
+    --ring: #FF6000;
+    --sidebar-bg: #170453;
+    --sidebar-text: #c4b5fd;
+    --sidebar-active: #FF6000;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Markdown content styles */
+.prose h1 { @apply text-2xl font-bold mb-4 text-white; }
+.prose h2 { @apply text-xl font-semibold mb-3 mt-6 text-white; }
+.prose h3 { @apply text-lg font-semibold mb-2 mt-4 text-white; }
+.prose p { @apply mb-3 leading-relaxed; }
+.prose ul { @apply list-disc pl-6 mb-3; }
+.prose ol { @apply list-decimal pl-6 mb-3; }
+.prose li { @apply mb-1; }
+.prose strong { @apply text-white font-semibold; }
+.prose a { @apply text-brand-orange hover:underline; }
+.prose blockquote { @apply border-l-4 border-brand-orange pl-4 italic my-3 text-gray-400; }
