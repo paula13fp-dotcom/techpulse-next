@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "techpulse-dev",
+      "runtimeExecutable": "/Users/paula.ferriz/.nvm/versions/node/v20.20.1/bin/npx",
+      "runtimeArgs": ["next", "dev", "--port", "3000"],
+      "port": 3000,
+      "autoPort": false,
+      "cwd": "/Users/paula.ferriz/techpulse-next"
+    }
+  ]
+}

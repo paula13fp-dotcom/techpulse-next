@@ -78,13 +78,13 @@ export function PostFeed({ sources }: { sources: Array<{ name: string; display_n
         <SelectFilter label="Fuente" value={source} onChange={(v) => { setSource(v); setPage(0) }} options={sourceOptions} className="w-48" />
         <SelectFilter label="Categoria" value={category} onChange={(v) => { setCategory(v); setPage(0) }} options={CATEGORIES} className="w-40" />
         <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs text-gray-400 mb-1">Buscar</label>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Buscar</label>
           <input
             type="text"
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(0) }}
             placeholder="Buscar en posts..."
-            className="w-full rounded-lg border border-[var(--border)] bg-[var(--secondary)] px-3 py-2 text-sm text-white placeholder-gray-500 outline-none focus:ring-2 focus:ring-brand-orange"
+            className="w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 placeholder-gray-400 outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent"
           />
         </div>
       </div>
@@ -104,14 +104,14 @@ export function PostFeed({ sources }: { sources: Array<{ name: string; display_n
             return (
               <div
                 key={post.id}
-                className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 hover:border-brand-orange/30 transition"
+                className="rounded-xl border border-gray-200 bg-white p-4 hover:border-brand-orange/40 hover:shadow-sm transition"
               >
                 <div className="flex items-start gap-3">
                   <span className="text-xl mt-0.5">{icon}</span>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-xs text-gray-400">{post.source_display}</span>
-                      <span className="text-xs text-gray-600">{timeAgo(post.published_at)}</span>
+                      <span className="text-xs font-medium text-gray-500">{post.source_display}</span>
+                      <span className="text-xs text-gray-400">{timeAgo(post.published_at)}</span>
                       {post.sentiment && (
                         <Badge variant={sentimentKey}>
                           {sentiment.icon} {sentiment.label}
@@ -123,17 +123,17 @@ export function PostFeed({ sources }: { sources: Array<{ name: string; display_n
                         href={post.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-medium text-white hover:text-brand-orange transition"
+                        className="text-sm font-medium text-gray-900 hover:text-brand-orange transition"
                       >
                         {post.title || 'Sin titulo'}
                       </a>
                     ) : (
-                      <p className="text-sm font-medium text-white">{post.title || 'Sin titulo'}</p>
+                      <p className="text-sm font-medium text-gray-900">{post.title || 'Sin titulo'}</p>
                     )}
                     {post.body && (
-                      <p className="text-xs text-gray-400 mt-1 line-clamp-2">{post.body}</p>
+                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">{post.body}</p>
                     )}
-                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
                       {post.score > 0 && <span>⬆️ {post.score}</span>}
                       {post.comment_count > 0 && <span>💬 {post.comment_count}</span>}
                       {post.view_count > 0 && <span>👁️ {post.view_count.toLocaleString('es-ES')}</span>}
@@ -149,15 +149,15 @@ export function PostFeed({ sources }: { sources: Array<{ name: string; display_n
             <button
               onClick={() => setPage(Math.max(0, page - 1))}
               disabled={page === 0}
-              className="rounded-lg bg-[var(--secondary)] px-4 py-2 text-sm text-gray-400 hover:text-white disabled:opacity-30 transition"
+              className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-30 transition"
             >
               Anterior
             </button>
-            <span className="text-sm text-gray-400">Pagina {page + 1}</span>
+            <span className="text-sm text-gray-500">Pagina {page + 1}</span>
             <button
               onClick={() => setPage(page + 1)}
               disabled={posts.length < PAGE_SIZE}
-              className="rounded-lg bg-[var(--secondary)] px-4 py-2 text-sm text-gray-400 hover:text-white disabled:opacity-30 transition"
+              className="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 disabled:opacity-30 transition"
             >
               Siguiente
             </button>

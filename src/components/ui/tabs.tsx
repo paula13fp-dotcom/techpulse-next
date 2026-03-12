@@ -26,7 +26,7 @@ export function Tabs({ defaultValue, children, className = '' }: TabsProps) {
 
 export function TabsList({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <div className={`flex gap-1 rounded-lg bg-[var(--secondary)] p-1 ${className}`}>
+    <div className={`inline-flex gap-1 rounded-lg border border-gray-200 bg-gray-50 p-1 ${className}`}>
       {children}
     </div>
   )
@@ -43,10 +43,10 @@ export function TabsTrigger({ value, children }: TabsTriggerProps) {
   return (
     <button
       onClick={() => setActive(value)}
-      className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+      className={`rounded-md px-4 py-2 text-sm font-medium transition-all ${
         isActive
-          ? 'bg-brand-orange text-white shadow-sm'
-          : 'text-gray-400 hover:text-white hover:bg-white/5'
+          ? 'bg-white text-brand-orange shadow-sm'
+          : 'text-gray-500 hover:text-gray-900'
       }`}
     >
       {children}

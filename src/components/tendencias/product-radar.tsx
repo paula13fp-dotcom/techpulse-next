@@ -35,7 +35,7 @@ export function ProductRadar({ data }: { data: ProductRow[] }) {
         <button
           onClick={() => setFilter(null)}
           className={`rounded-full px-3 py-1 text-xs font-medium transition ${
-            filter === null ? 'bg-brand-orange text-white' : 'bg-[var(--secondary)] text-gray-400 hover:text-white'
+            filter === null ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-900'
           }`}
         >
           Todas
@@ -45,7 +45,7 @@ export function ProductRadar({ data }: { data: ProductRow[] }) {
             key={cat}
             onClick={() => setFilter(cat)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition ${
-              filter === cat ? 'bg-brand-orange text-white' : 'bg-[var(--secondary)] text-gray-400 hover:text-white'
+              filter === cat ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-900'
             }`}
           >
             {cat}
@@ -61,29 +61,29 @@ export function ProductRadar({ data }: { data: ProductRow[] }) {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] overflow-hidden">
+      <div className="rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-[var(--border)]">
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">Producto</th>
-              <th className="text-left px-4 py-3 text-xs font-medium text-gray-400">Categoria</th>
-              <th className="text-right px-4 py-3 text-xs font-medium text-gray-400">7d</th>
-              <th className="text-right px-4 py-3 text-xs font-medium text-gray-400">30d</th>
-              <th className="text-right px-4 py-3 text-xs font-medium text-gray-400">% Pos</th>
-              <th className="text-right px-4 py-3 text-xs font-medium text-gray-400">% Neg</th>
+            <tr className="border-b border-gray-200 bg-gray-50">
+              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Producto</th>
+              <th className="text-left px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">Categoria</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">7d</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">30d</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">% Pos</th>
+              <th className="text-right px-4 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wide">% Neg</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((p) => (
-              <tr key={p.canonical_name} className="border-b border-[var(--border)] hover:bg-white/5 transition">
-                <td className="px-4 py-3 text-sm text-white font-medium">{p.canonical_name}</td>
-                <td className="px-4 py-3 text-xs text-gray-400">{p.category}</td>
+              <tr key={p.canonical_name} className="border-b border-gray-100 hover:bg-gray-50 transition">
+                <td className="px-4 py-3 text-sm text-gray-900 font-medium">{p.canonical_name}</td>
+                <td className="px-4 py-3 text-xs text-gray-500">{p.category}</td>
                 <td className="px-4 py-3 text-sm text-right text-brand-orange font-semibold">{p.mentions_7d}</td>
-                <td className="px-4 py-3 text-sm text-right text-gray-300">{p.mentions_30d}</td>
-                <td className="px-4 py-3 text-sm text-right text-green-400">
+                <td className="px-4 py-3 text-sm text-right text-gray-600">{p.mentions_30d}</td>
+                <td className="px-4 py-3 text-sm text-right text-green-600">
                   {p.avg_pos != null ? `${p.avg_pos}%` : '-'}
                 </td>
-                <td className="px-4 py-3 text-sm text-right text-red-400">
+                <td className="px-4 py-3 text-sm text-right text-red-600">
                   {p.avg_neg != null ? `${p.avg_neg}%` : '-'}
                 </td>
               </tr>

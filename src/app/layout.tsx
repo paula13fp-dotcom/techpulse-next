@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { Sidebar } from '@/components/layout/sidebar'
+import { Navbar } from '@/components/layout/navbar'
 
 export const metadata: Metadata = {
   title: 'TechPulse',
@@ -14,12 +14,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es">
       <body>
-        <div className="flex h-screen overflow-hidden">
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto">
-            <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="min-h-screen flex flex-col">
+          <Navbar />
+          <main className="flex-1">
+            <div className="max-w-7xl mx-auto px-6 py-6">
               {children}
             </div>
           </main>

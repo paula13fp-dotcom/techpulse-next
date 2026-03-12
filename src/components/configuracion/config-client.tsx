@@ -42,16 +42,16 @@ export function ConfigClient({
     <div className="space-y-6">
       {/* System KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5">
-          <p className="text-sm text-gray-400">Posts en base de datos</p>
-          <p className="text-2xl font-bold text-white mt-1">{totalPosts.toLocaleString('es-ES')}</p>
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Posts en base de datos</p>
+          <p className="text-2xl font-bold text-gray-900 mt-1">{totalPosts.toLocaleString('es-ES')}</p>
         </div>
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5">
-          <p className="text-sm text-gray-400">Fuentes activas</p>
-          <p className="text-2xl font-bold text-white mt-1">{activeSources} / {sourceStats.length}</p>
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Fuentes activas</p>
+          <p className="text-2xl font-bold text-gray-900 mt-1">{activeSources} / {sourceStats.length}</p>
         </div>
-        <div className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-5">
-          <p className="text-sm text-gray-400">Plataforma</p>
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-medium text-gray-500 uppercase tracking-wide">Plataforma</p>
           <p className="text-2xl font-bold text-brand-orange mt-1">Next.js + Vercel</p>
         </div>
       </div>
@@ -65,20 +65,20 @@ export function ConfigClient({
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-[var(--border)]">
-                  <th className="text-left px-4 py-2 text-xs font-medium text-gray-400">Fuente</th>
-                  <th className="text-right px-4 py-2 text-xs font-medium text-gray-400">Posts</th>
-                  <th className="text-right px-4 py-2 text-xs font-medium text-gray-400">Ultimo scraping</th>
-                  <th className="text-center px-4 py-2 text-xs font-medium text-gray-400">Estado</th>
+                <tr className="border-b border-gray-200 bg-gray-50">
+                  <th className="text-left px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Fuente</th>
+                  <th className="text-right px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Posts</th>
+                  <th className="text-right px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Ultimo scraping</th>
+                  <th className="text-center px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {sourceStats.map((s) => {
                   const isActive = s.post_count > 0
                   return (
-                    <tr key={s.display_name} className="border-b border-[var(--border)] hover:bg-white/5">
-                      <td className="px-4 py-3 text-sm text-white">{s.display_name}</td>
-                      <td className="px-4 py-3 text-sm text-right text-gray-300">{s.post_count}</td>
+                    <tr key={s.display_name} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="px-4 py-3 text-sm text-gray-900 font-medium">{s.display_name}</td>
+                      <td className="px-4 py-3 text-sm text-right text-gray-600">{s.post_count}</td>
                       <td className="px-4 py-3 text-xs text-right text-gray-400">{timeAgo(s.last_scraped)}</td>
                       <td className="px-4 py-3 text-center">
                         <Badge variant={isActive ? 'positive' : 'neutral'}>
@@ -105,10 +105,10 @@ export function ConfigClient({
               {batches.map((b) => (
                 <div
                   key={b.id}
-                  className="flex items-center justify-between rounded-lg bg-[var(--secondary)] px-4 py-3"
+                  className="flex items-center justify-between rounded-lg bg-gray-50 px-4 py-3"
                 >
                   <div>
-                    <span className="text-sm text-white font-medium">{b.job_type}</span>
+                    <span className="text-sm text-gray-900 font-medium">{b.job_type}</span>
                     <span className="text-xs text-gray-400 ml-2">({b.post_count} posts)</span>
                   </div>
                   <div className="flex items-center gap-3">

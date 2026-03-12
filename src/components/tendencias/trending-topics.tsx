@@ -28,13 +28,13 @@ export function TrendingTopics({ topics }: { topics: Topic[] }) {
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-base font-semibold text-white">{topic.label}</h3>
-                  {topic.is_trending && <Badge variant="trending">🔥 Trending</Badge>}
+                  <h3 className="text-base font-semibold text-gray-900">{topic.label}</h3>
+                  {topic.is_trending && <Badge variant="trending">Trending</Badge>}
                   {topic.category_name && <Badge>{topic.category_name}</Badge>}
                   {topic.product_name && <Badge variant="default">{topic.product_name}</Badge>}
                 </div>
                 {topic.description && (
-                  <div className="prose max-w-none text-sm text-gray-400">
+                  <div className="prose max-w-none text-sm">
                     <ReactMarkdown>{topic.description}</ReactMarkdown>
                   </div>
                 )}

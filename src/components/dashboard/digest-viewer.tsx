@@ -43,7 +43,7 @@ export function DigestViewer({ digest }: DigestViewerProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="prose max-w-none text-gray-300">
+        <div className="prose max-w-none">
           <ReactMarkdown>{digest.content}</ReactMarkdown>
         </div>
       </CardContent>

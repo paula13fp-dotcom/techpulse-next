@@ -31,7 +31,7 @@ export function GoogleTrends({ cache }: GoogleTrendsProps) {
             className={`rounded-full px-3 py-1 text-xs font-medium transition ${
               selected === cat
                 ? 'bg-brand-orange text-white'
-                : 'bg-[var(--secondary)] text-gray-400 hover:text-white'
+                : 'bg-gray-100 text-gray-500 hover:text-gray-900'
             }`}
           >
             {cat}
@@ -56,11 +56,11 @@ export function GoogleTrends({ cache }: GoogleTrendsProps) {
                   {top.map((item, i) => (
                     <div key={item.query} className="flex items-center justify-between py-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-500 w-6">{i + 1}.</span>
-                        <span className="text-sm text-white">{item.query}</span>
+                        <span className="text-xs text-gray-400 w-6">{i + 1}.</span>
+                        <span className="text-sm text-gray-900">{item.query}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="w-24 h-1.5 bg-[var(--secondary)] rounded-full overflow-hidden">
+                        <div className="w-24 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                           <div
                             className="h-full bg-brand-orange rounded-full"
                             style={{ width: `${item.value}%` }}
@@ -87,8 +87,8 @@ export function GoogleTrends({ cache }: GoogleTrendsProps) {
                 <div className="space-y-2">
                   {rising.map((item, i) => (
                     <div key={item.query} className="flex items-center justify-between py-1">
-                      <span className="text-sm text-white">{item.query}</span>
-                      <span className="text-xs font-semibold text-green-400">{item.value}</span>
+                      <span className="text-sm text-gray-900">{item.query}</span>
+                      <span className="text-xs font-semibold text-green-600">{item.value}</span>
                     </div>
                   ))}
                 </div>
@@ -99,7 +99,7 @@ export function GoogleTrends({ cache }: GoogleTrendsProps) {
       )}
 
       {entry?.updated_at && (
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-400 text-center">
           Datos actualizados: {new Date(entry.updated_at).toLocaleString('es-ES')}
         </p>
       )}

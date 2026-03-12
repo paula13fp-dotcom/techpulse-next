@@ -48,16 +48,16 @@ export function KeywordPlanner({ cache }: KeywordPlannerProps) {
           <CardContent>
             <div className="space-y-1.5">
               {byVolume.map((kw) => (
-                <div key={kw.keyword} className="flex items-center justify-between py-1 border-b border-[var(--border)]">
-                  <span className="text-sm text-white">{kw.keyword}</span>
+                <div key={kw.keyword} className="flex items-center justify-between py-1 border-b border-gray-100">
+                  <span className="text-sm text-gray-900">{kw.keyword}</span>
                   <div className="flex items-center gap-3">
                     <span className="text-xs text-gray-400">{kw.searches_display}/mes</span>
                     <span className={`text-xs px-2 py-0.5 rounded-full ${
                       kw.competition_label === 'Alta' || kw.competition_label === 'HIGH'
-                        ? 'bg-red-500/20 text-red-400'
+                        ? 'bg-red-50 text-red-600'
                         : kw.competition_label === 'Media' || kw.competition_label === 'MEDIUM'
-                        ? 'bg-yellow-500/20 text-yellow-400'
-                        : 'bg-green-500/20 text-green-400'
+                        ? 'bg-yellow-50 text-yellow-700'
+                        : 'bg-green-50 text-green-600'
                     }`}>
                       {kw.competition_label}
                     </span>
@@ -79,8 +79,8 @@ export function KeywordPlanner({ cache }: KeywordPlannerProps) {
             ) : (
               <div className="space-y-1.5">
                 {lowComp.map((kw) => (
-                  <div key={kw.keyword} className="flex items-center justify-between py-1 border-b border-[var(--border)]">
-                    <span className="text-sm text-white">{kw.keyword}</span>
+                  <div key={kw.keyword} className="flex items-center justify-between py-1 border-b border-gray-100">
+                    <span className="text-sm text-gray-900">{kw.keyword}</span>
                     <span className="text-xs text-gray-400">{kw.searches_display}/mes</span>
                   </div>
                 ))}
@@ -91,7 +91,7 @@ export function KeywordPlanner({ cache }: KeywordPlannerProps) {
       </div>
 
       {entry?.updated_at && (
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-400 text-center">
           Datos actualizados: {new Date(entry.updated_at).toLocaleString('es-ES')}
         </p>
       )}

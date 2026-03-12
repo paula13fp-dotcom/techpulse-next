@@ -4,58 +4,55 @@
 
 @layer base {
   :root {
-    --background: #0a0a0f;
-    --foreground: #e5e7eb;
-    --card: #111119;
-    --card-foreground: #e5e7eb;
+    --background: #f8f9fb;
+    --foreground: #1a1a2e;
+    --card: #ffffff;
+    --card-foreground: #1a1a2e;
     --primary: #FF6000;
     --primary-foreground: #ffffff;
-    --secondary: #1a1a2e;
-    --secondary-foreground: #e5e7eb;
-    --muted: #1a1a2e;
-    --muted-foreground: #9ca3af;
+    --secondary: #f1f3f5;
+    --secondary-foreground: #1a1a2e;
+    --muted: #f1f3f5;
+    --muted-foreground: #6b7280;
     --accent: #FF6000;
     --accent-foreground: #ffffff;
     --destructive: #ef4444;
     --destructive-foreground: #ffffff;
-    --border: #2a2a3e;
-    --input: #2a2a3e;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
     --ring: #FF6000;
-    --sidebar-bg: #170453;
-    --sidebar-text: #c4b5fd;
-    --sidebar-active: #FF6000;
   }
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 4px;
+  background: #d1d5db;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
+  background: #9ca3af;
 }
 
 /* Markdown content styles */
-.prose h1 { @apply text-2xl font-bold mb-4 text-white; }
-.prose h2 { @apply text-xl font-semibold mb-3 mt-6 text-white; }
-.prose h3 { @apply text-lg font-semibold mb-2 mt-4 text-white; }
-.prose p { @apply mb-3 leading-relaxed; }
-.prose ul { @apply list-disc pl-6 mb-3; }
-.prose ol { @apply list-decimal pl-6 mb-3; }
+.prose h1 { @apply text-2xl font-bold mb-4 text-gray-900; }
+.prose h2 { @apply text-xl font-semibold mb-3 mt-6 text-gray-900; }
+.prose h3 { @apply text-lg font-semibold mb-2 mt-4 text-gray-800; }
+.prose p { @apply mb-3 leading-relaxed text-gray-600; }
+.prose ul { @apply list-disc pl-6 mb-3 text-gray-600; }
+.prose ol { @apply list-decimal pl-6 mb-3 text-gray-600; }
 .prose li { @apply mb-1; }
-.prose strong { @apply text-white font-semibold; }
+.prose strong { @apply text-gray-900 font-semibold; }
 .prose a { @apply text-brand-orange hover:underline; }
-.prose blockquote { @apply border-l-4 border-brand-orange pl-4 italic my-3 text-gray-400; }
+.prose blockquote { @apply border-l-4 border-brand-orange pl-4 italic my-3 text-gray-500; }

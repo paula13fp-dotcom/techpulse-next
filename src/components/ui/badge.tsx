@@ -7,12 +7,12 @@ interface BadgeProps {
 }
 
 const VARIANT_STYLES: Record<string, string> = {
-  default: 'bg-[var(--secondary)] text-[var(--foreground)]',
-  positive: 'bg-green-500/20 text-green-400',
-  negative: 'bg-red-500/20 text-red-400',
-  neutral: 'bg-gray-500/20 text-gray-400',
-  mixed: 'bg-yellow-500/20 text-yellow-400',
-  trending: 'bg-orange-500/20 text-orange-400',
+  default: 'bg-gray-100 text-gray-700',
+  positive: 'bg-green-50 text-green-700 border border-green-200',
+  negative: 'bg-red-50 text-red-700 border border-red-200',
+  neutral: 'bg-gray-50 text-gray-500 border border-gray-200',
+  mixed: 'bg-yellow-50 text-yellow-700 border border-yellow-200',
+  trending: 'bg-orange-50 text-orange-700 border border-orange-200',
 }
 
 export function Badge({ children, variant = 'default', className = '' }: BadgeProps) {

@@ -28,7 +28,7 @@ export function AmazonTab({ cache }: AmazonTabProps) {
         <button
           onClick={() => setTab('bestsellers')}
           className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
-            tab === 'bestsellers' ? 'bg-brand-orange text-white' : 'bg-[var(--secondary)] text-gray-400 hover:text-white'
+            tab === 'bestsellers' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-900'
           }`}
         >
           Mas vendidos
@@ -36,7 +36,7 @@ export function AmazonTab({ cache }: AmazonTabProps) {
         <button
           onClick={() => setTab('new_releases')}
           className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
-            tab === 'new_releases' ? 'bg-brand-orange text-white' : 'bg-[var(--secondary)] text-gray-400 hover:text-white'
+            tab === 'new_releases' ? 'bg-brand-orange text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-900'
           }`}
         >
           Novedades
@@ -51,16 +51,16 @@ export function AmazonTab({ cache }: AmazonTabProps) {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-[var(--border)]">
-                    <th className="text-left px-3 py-2 text-xs font-medium text-gray-400">Pos.</th>
-                    <th className="text-left px-3 py-2 text-xs font-medium text-gray-400">Producto</th>
-                    <th className="text-right px-3 py-2 text-xs font-medium text-gray-400">Precio</th>
-                    <th className="text-right px-3 py-2 text-xs font-medium text-gray-400">Valoracion</th>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Pos.</th>
+                    <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Producto</th>
+                    <th className="text-right px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Precio</th>
+                    <th className="text-right px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">Valoracion</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((p, i) => (
-                    <tr key={i} className="border-b border-[var(--border)] hover:bg-white/5 transition">
+                    <tr key={i} className="border-b border-gray-100 hover:bg-gray-50 transition">
                       <td className="px-3 py-2 text-sm text-gray-400">{i + 1}</td>
                       <td className="px-3 py-2">
                         {p.url ? (
@@ -68,16 +68,16 @@ export function AmazonTab({ cache }: AmazonTabProps) {
                             href={p.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-white hover:text-brand-orange transition line-clamp-1"
+                            className="text-sm text-gray-900 hover:text-brand-orange transition line-clamp-1"
                           >
                             {p.title}
                           </a>
                         ) : (
-                          <span className="text-sm text-white line-clamp-1">{p.title}</span>
+                          <span className="text-sm text-gray-900 line-clamp-1">{p.title}</span>
                         )}
                       </td>
                       <td className="px-3 py-2 text-sm text-right text-brand-orange font-medium">{p.price}</td>
-                      <td className="px-3 py-2 text-sm text-right text-yellow-400">{p.rating}</td>
+                      <td className="px-3 py-2 text-sm text-right text-yellow-600">{p.rating}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -88,7 +88,7 @@ export function AmazonTab({ cache }: AmazonTabProps) {
       )}
 
       {entry?.updated_at && (
-        <p className="text-xs text-gray-500 text-center">
+        <p className="text-xs text-gray-400 text-center">
           Datos actualizados: {new Date(entry.updated_at).toLocaleString('es-ES')}
         </p>
       )}
