@@ -13,8 +13,8 @@ class Settings:
     # YouTube
     YOUTUBE_API_KEY: str | None = _get("YOUTUBE_API_KEY")
 
-    # Anthropic
-    ANTHROPIC_API_KEY: str | None = _get("ANTHROPIC_API_KEY")
+    # Google Gemini
+    GEMINI_API_KEY: str | None = _get("GEMINI_API_KEY")
 
     # X / Twitter
     X_USERNAME: str | None = _get("X_USERNAME")
@@ -33,8 +33,8 @@ class Settings:
         return bool(cls.YOUTUBE_API_KEY)
 
     @classmethod
-    def has_anthropic(cls) -> bool:
-        return bool(cls.ANTHROPIC_API_KEY)
+    def has_gemini(cls) -> bool:
+        return bool(cls.GEMINI_API_KEY)
 
     @classmethod
     def has_x(cls) -> bool:

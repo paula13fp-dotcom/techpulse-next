@@ -4,10 +4,9 @@ import json
 import logging
 from datetime import datetime, timezone, timedelta
 
-import anthropic
-
 from supabase_client import get_client
 from config.settings import settings
+from analysis.gemini_client import GeminiClient
 
 logger = logging.getLogger("analysis.digest")
 
@@ -49,8 +48,8 @@ Omite la seccion Pulso del mercado si no hay datos de mercado disponibles."""
 
 def run_digest(digest_type: str = "daily") -> str | None:
     """Generate a digest. Returns the digest text or None on failure."""
-    if not settings.has_anthropic():
-        logger.warning("Anthropic API key not set — skipping digest")
+    if not settings.has_gemini():
+        logger.warning("Gemini API key not set — skipping digest")
         return None
 
     client = get_client()
@@ -118,18 +117,12 @@ def run_digest(digest_type: str = "daily") -> str | None:
     )
 
     logger.info(f"Generating {period_label} digest...")
-    claude = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+    gemini = GeminiClient(api_key=settings.GEMINI_API_KEY)
 
     try:
-        response = claude.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=2048,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        content = response.content[0].text
+        content = gemini.complete(prompt, system=SYSTEM_PROMPT, max_tokens=2048)
     except Exception as e:
-        logger.error(f"Claude API call failed: {e}")
+        logger.error(f"Gemini API call failed: {e}")
         return None
 
     period_end = datetime.now(timezone.utc)
@@ -140,7 +133,7 @@ def run_digest(digest_type: str = "daily") -> str | None:
         "period_start": period_start.isoformat(),
         "period_end": period_end.isoformat(),
         "content": content,
-        "model_used": "claude-sonnet-4-20250514",
+        "model_used": "gemini-2.5-flash",
     }).execute()
 
     logger.info(f"{period_label.capitalize()} digest generated ({len(content)} chars)")

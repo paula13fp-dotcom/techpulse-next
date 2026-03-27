@@ -3,10 +3,9 @@ import json
 import logging
 from datetime import datetime, timezone, timedelta
 
-import anthropic
-
 from supabase_client import get_client
 from config.settings import settings
+from analysis.gemini_client import GeminiClient
 
 logger = logging.getLogger("analysis.clustering")
 
@@ -32,8 +31,8 @@ Responde con JSON:
 
 def run_clustering(days_back: int = 3) -> int:
     """Cluster recent posts. Returns number of clusters created."""
-    if not settings.has_anthropic():
-        logger.warning("Anthropic API key not set — skipping clustering")
+    if not settings.has_gemini():
+        logger.warning("Gemini API key not set — skipping clustering")
         return 0
 
     client = get_client()
@@ -61,18 +60,16 @@ def run_clustering(days_back: int = 3) -> int:
         for p in posts
     ], ensure_ascii=False)
 
-    claude = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+    gemini = GeminiClient(api_key=settings.GEMINI_API_KEY)
 
     try:
-        response = claude.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=4096,
+        text = gemini.complete(
+            USER_PROMPT_TEMPLATE.format(posts_json=posts_json),
             system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": USER_PROMPT_TEMPLATE.format(posts_json=posts_json)}],
+            max_tokens=4096,
         )
-        text = response.content[0].text
     except Exception as e:
-        logger.error(f"Claude API call failed: {e}")
+        logger.error(f"Gemini API call failed: {e}")
         return 0
 
     try:

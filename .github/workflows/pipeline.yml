@@ -1,0 +1,44 @@
+name: TechPulse Pipeline
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 07:00 CET (06:00 UTC) cada día
+  workflow_dispatch:        # ejecución manual desde GitHub Actions
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: python/requirements.txt
+
+      - name: Instalar dependencias
+        run: pip install -r python/requirements.txt
+
+      - name: Ejecutar scrapers
+        run: python python/run_scrapers.py
+
+      - name: Ejecutar análisis (sentimiento + clustering + digest)
+        run: python python/run_analysis.py
+
+    env:
+      GEMINI_API_KEY:       ${{ secrets.GEMINI_API_KEY }}
+      SUPABASE_URL:         ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      REDDIT_CLIENT_ID:     ${{ secrets.REDDIT_CLIENT_ID }}
+      REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+      YOUTUBE_API_KEY:      ${{ secrets.YOUTUBE_API_KEY }}
+      X_USERNAME:           ${{ secrets.X_USERNAME }}
+      X_EMAIL:              ${{ secrets.X_EMAIL }}
+      X_PASSWORD:           ${{ secrets.X_PASSWORD }}
+      REVALIDATE_URL:       ${{ secrets.REVALIDATE_URL }}
+      REVALIDATE_SECRET:    ${{ secrets.REVALIDATE_SECRET }}

@@ -3,10 +3,9 @@ import json
 import logging
 from datetime import datetime, timezone
 
-import anthropic
-
 from supabase_client import get_client
 from config.settings import settings
+from analysis.gemini_client import GeminiClient
 
 logger = logging.getLogger("analysis.sentiment")
 
@@ -32,8 +31,8 @@ Respond with a JSON array:
 
 def run_sentiment_analysis(limit: int = 100) -> int:
     """Process unanalyzed posts. Returns number of posts analyzed."""
-    if not settings.has_anthropic():
-        logger.warning("Anthropic API key not set — skipping sentiment analysis")
+    if not settings.has_gemini():
+        logger.warning("Gemini API key not set — skipping sentiment analysis")
         return 0
 
     client = get_client()
@@ -66,11 +65,11 @@ def run_sentiment_analysis(limit: int = 100) -> int:
 
     logger.info(f"Analyzing sentiment for {len(posts)} posts")
     analyzed = 0
-    claude = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+    gemini = GeminiClient(api_key=settings.GEMINI_API_KEY)
 
     for i in range(0, len(posts), BATCH_SIZE):
         batch = posts[i:i + BATCH_SIZE]
-        results = _analyze_batch(claude, batch)
+        results = _analyze_batch(gemini, batch)
         if results:
             _save_results(client, results)
             analyzed += len(results)
@@ -79,7 +78,7 @@ def run_sentiment_analysis(limit: int = 100) -> int:
     return analyzed
 
 
-def _analyze_batch(claude: anthropic.Anthropic, posts: list[dict]) -> list[dict]:
+def _analyze_batch(gemini: GeminiClient, posts: list[dict]) -> list[dict]:
     posts_json = json.dumps([
         {
             "id": p["id"],
@@ -92,15 +91,9 @@ def _analyze_batch(claude: anthropic.Anthropic, posts: list[dict]) -> list[dict]
     prompt = USER_PROMPT_TEMPLATE.format(posts_json=posts_json)
 
     try:
-        response = claude.messages.create(
-            model="claude-sonnet-4-20250514",
-            max_tokens=4096,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        text = response.content[0].text
+        text = gemini.complete(prompt, system=SYSTEM_PROMPT, max_tokens=4096)
     except Exception as e:
-        logger.error(f"Claude API call failed: {e}")
+        logger.error(f"Gemini API call failed: {e}")
         return []
 
     try:
